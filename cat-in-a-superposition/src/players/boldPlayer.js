@@ -67,6 +67,7 @@ class RandomPlayer {
   }
 
   observe (_board, _players, _turn, _ledColor) {
+    // 本当はここで状態の推移を見て色々考えたい……。パラドックスしやすいうっかり屋とかの、敵の特性が分かるかもしれない。
   }
 
   endGame () {

@@ -56,5 +56,5 @@ for (const i of range(0, 100)) {
 
 // 結果を出力します。
 for (const [order, command] of zip(scores, commands)) {
-  console.log(`${order}\t${command}`)
+  console.log(`${order / 100}\t${command}`)
 }

@@ -28,7 +28,7 @@ import(`../players/${process.argv[2]}.js`).then(({ beginGame, getAction, observe
       case 'endGame': {
         endGame()
         console.log(JSON.stringify('OK'))
-        process.exit(0)
+        process.exit(0)  // プロセス終了。
       }
     }
   })
