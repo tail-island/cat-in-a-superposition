@@ -11,13 +11,11 @@ class RandomPlayer {
 
   discardHand (_board, players, _legalActions) {
     // 大胆なので、最も小さな手札を破棄します。
-
     return head(sortBy(identity, uniq(players[this.name].hands)))
   }
 
   predictWinsCount (board, players, legalActions) {
     // 大胆なので、最大の勝利数を予測します。
-
     return 3
   }
 
