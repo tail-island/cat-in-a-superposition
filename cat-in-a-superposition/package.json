@@ -1,0 +1,21 @@
+{
+  "name": "cat-in-a-superposition",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "license": "ISC",
+  "scripts": {
+    "play": "node src/cli/play.js",
+    "play100": "node src/cli/play100.js"
+  },
+  "dependencies": {
+    "await-timeout": "^1.1.1",
+    "ramda": "^0.29.1",
+    "random-js": "^2.1.0",
+    "readline": "^1.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "eslint-config-standard": "^17.1.0"
+  }
+}
