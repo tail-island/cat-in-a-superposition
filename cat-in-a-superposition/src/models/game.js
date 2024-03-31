@@ -132,7 +132,7 @@ export class Game {
     // アクションを実行する関数です。
     const doAction = (() => {
       switch (player.phase) {
-        // カードを廃棄します。
+        // カードを1枚廃棄します。
         case 0:
           return over(
             lensPath(['players', actionPlayerIndex, 'hands']),
