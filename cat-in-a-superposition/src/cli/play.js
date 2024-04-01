@@ -99,7 +99,6 @@ function endGame (player) {
   })
 }
 
-
 if (process.argv.length < 6) {
   console.error('Error!')
   console.error('usage: npm run xxx "command for player A" "command for player B" "command for player C" "command for player D"')
