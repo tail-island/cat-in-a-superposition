@@ -128,4 +128,3 @@ while True:
         case 'endGame':
             player.end_game()
             print(json.dumps('OK'))
-            exit(0)  # プロセス終了

@@ -209,6 +209,7 @@ try {
   for (const player of players) {
     try {
       await Timeout.wrap(endGame(player), 30_000, 'timeout...')
+      player.kill()
     } catch (error) {
       console.error(error.message)
     }

@@ -25,20 +25,6 @@ class IndecisivePlayer {
   }
 }
 
-const player = new IndecisivePlayer(process.argv[3] != null ? parseInt(process.argv[3]) : null)
-
-export function beginGame (playerIndex) {
-  player.beginGame(playerIndex)
-}
-
-export function getAction (board, players, turn, ledColor, legalActions) {
-  return player.getAction(board, players, turn, ledColor, legalActions)
-}
-
-export function observe (board, players, turn, ledColor, actionPlayerIndex, action) {
-  return player.observe(board, players, turn, ledColor, actionPlayerIndex, action)
-}
-
-export function endGame () {
-  player.endGame()
+export function createPlayer (argv) {
+  return new IndecisivePlayer(argv.length > 0 ? parseInt(argv[0]) : null)
 }

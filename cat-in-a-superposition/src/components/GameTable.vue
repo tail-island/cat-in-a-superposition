@@ -1,5 +1,6 @@
 <script setup>
 import ActionLog from '@/components/ActionLog.vue'
+import ActionSelector from '@/components/ActionSelector.vue'
 import MyHands from '@/components/MyHands.vue'
 import PlayerState from '@/components/PlayerState.vue'
 import ResearchBoard from '@/components/ResearchBoard.vue'
@@ -9,14 +10,20 @@ const store = useGameStateStore()
 </script>
 
 <template>
-<div class="tabletop">
-  <div class="property">
-    Round: {{ !store.isGameEnd ? store.gameState.round : '-' }}
+<div v-if="store.gameState">
+  <div class="tabletop">
+    <div class="property-1">
+      Round {{ store.gameState.round <= 3 ? store.gameState.round: '-' }}
+    </div>
+    <div class="property-2">
+      led color {{ store.gameState?.ledColor ?? '-' }}
+    </div>
+    <PlayerState v-for="player in store.gameState.players" v-bind:key="player.playerIndex" :player="player" :class="`player-${player.playerIndex}`" />
+    <ResearchBoard class="research-board" :board="store.gameState.board" />
+    <MyHands class="my-hands" :hands="store.gameState.players[3].hands" />
+    <ActionLog class="action-log" />
+    <ActionSelector class="action-selector" />
   </div>
-  <PlayerState v-for="player in store.gameState.players" v-bind:key="player.playerIndex" :player="player" :class="`player-${player.playerIndex}`" />
-  <ResearchBoard class="research-board" :board="store.gameState.board" />
-  <MyHands class="my-hands" :hands="store.gameState.players[3].hands" />
-  <ActionLog class="action-log" />
 </div>
 </template>
 
@@ -29,8 +36,14 @@ const store = useGameStateStore()
   width: 1000px;
 }
 
-.property {
+.property-1 {
   grid-column: 1;
+  grid-row: 1;
+  margin: 10px;
+}
+
+.property-2 {
+  grid-column: 5;
   grid-row: 1;
   margin: 10px;
 }
@@ -68,5 +81,10 @@ const store = useGameStateStore()
 .action-log {
   grid-column: 6;
   grid-row: 1 / 2;
+}
+
+.action-selector {
+  grid-column: 6;
+  grid-row: 3;
 }
 </style>

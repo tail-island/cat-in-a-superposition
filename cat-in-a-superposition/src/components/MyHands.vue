@@ -9,7 +9,7 @@ const store = useGameStateStore()
 
 <template>
 <div class="hands">
-  <div v-if="!store.isGameEnd">
+  <div v-if="store.gameState.round < 4">
     <div v-for="(hand, index) in hands" v-bind:key="index">
       <CatCard style="card" :number="hand" />
     </div>

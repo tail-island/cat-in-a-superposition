@@ -91,20 +91,6 @@ class RandomPlayer {
   }
 }
 
-const player = new RandomPlayer()
-
-export function beginGame (playerIndex) {
-  player.beginGame(playerIndex)
-}
-
-export function getAction (board, players, turn, ledColor, legalActions) {
-  return player.getAction(board, players, turn, ledColor, legalActions)
-}
-
-export function observe (board, players, turn, ledColor, actionPlayerIndex, action) {
-  return player.observe(board, players, turn, ledColor, actionPlayerIndex, action)
-}
-
-export function endGame () {
-  player.endGame()
+export function createPlayer (_argv) {
+  return new RandomPlayer()
 }

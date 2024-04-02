@@ -17,7 +17,7 @@ onMounted(() => {
 
 <template>
 <div id="action-log" class="action-log">
-  <div v-for="(action, index) in store.actions" :key="index">{{ action }}</div>
+  <div v-for="(action, index) in store.actions" :key="index" class="action">{{ action }}</div>
 </div>
 </template>
 
@@ -25,8 +25,12 @@ onMounted(() => {
 .action-log {
   border: 1px solid #808080;
   font-size: 12px;
-  height: 400px;
+  height: 380px;
   margin: 10px;
   overflow-y: scroll;
+}
+
+.action {
+  margin: 0px 8px;
 }
 </style>

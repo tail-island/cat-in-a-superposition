@@ -9,7 +9,8 @@
     "build": "vite build",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "play": "node src/cli/play.js",
-    "play100": "node src/cli/play100.js"
+    "play100": "node src/cli/play100.js",
+    "webSocket": "node src/cli/webSocketAdapter.js"
   },
   "dependencies": {
     "await-timeout": "^1.1.1",
