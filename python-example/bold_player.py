@@ -8,16 +8,16 @@ from io import TextIOWrapper
 # プレイヤーのサンプル（性格：大胆）
 class BoldPlayer:
     # ゲームを開始します。
-    def begin_game(self, name):
+    def begin_game(self, playerIndex):
         print('1-999 ver 0.0', file=sys.stderr)  # 標準出力は通信で使用するので、標準エラー出力にログを出力します。受付番号やバージョンをログ出力しておけば、運営のミスを検出できる！
-        self.name = name
+        self.playerIndex = playerIndex
 
     # アクションを選択します。
     def get_action(self, board, players, turn, led_color, legal_actions):
         # 最初に捨てるカードを選びます。
         def discard_hand():
             # 大胆なので、最も小さな手札を破棄します。
-            return first(sorted(distinct(players[self.name]['hands'])))
+            return first(sorted(distinct(players[self.playerIndex]['hands'])))
 
         # 勝利数を予測します。
         def predict_wins_count():
@@ -31,7 +31,7 @@ class BoldPlayer:
                 return 'paradox'
 
             # 数字が大きい順に並べた重複なしの手札。
-            hands = tuple(reversed(sorted(distinct(players[self.name]['hands']))))
+            hands = tuple(reversed(sorted(distinct(players[self.playerIndex]['hands']))))
 
             if turn == 0:
                 # 合法手の中から、最も数字が大きい手を選択します。
@@ -66,7 +66,7 @@ class BoldPlayer:
                 return result
 
         # Python3.10で追加されたmatchで分岐して、処理を振り分けます。
-        match players[self.name]['phase']:
+        match players[self.playerIndex]['phase']:
             case 0:
                 return discard_hand()
 
@@ -77,7 +77,7 @@ class BoldPlayer:
                 return declare_observed_color()
 
     # 状態を調べます。
-    def observe(self, board, players, turn, led_color):
+    def observe(self, board, players, turn, led_color, actionPlayerIndex, action):
         #  本当はここで状態の推移を見て色々考えたい……。パラドックスしやすいうっかり屋とかの、敵の特性が分かるかもしれない。
         pass
 
@@ -102,7 +102,7 @@ while True:
     match message['command']:
         # ゲーム開始。
         case 'beginGame':
-            player.begin_game(message['parameter']['name'])
+            player.begin_game(message['parameter']['playerIndex'])
             print(json.dumps('OK'))
 
         # アクション選択。
@@ -119,7 +119,9 @@ while True:
             player.observe(message['parameter']['board'],
                            message['parameter']['players'],
                            message['parameter']['turn'],
-                           message['parameter']['ledColor'])
+                           message['parameter']['ledColor'],
+                           message['parameter']['actionPlayerIndex'],
+                           message['parameter']['action'])
             print(json.dumps('OK'))
 
         # ゲーム終了。

@@ -1,7 +1,7 @@
 import Timeout from 'await-timeout'
 import { spawn } from 'child_process'
 import { createWriteStream } from 'fs'
-import { count, equals, find, insert, isNotNil, join, lensPath, map, range, set, zipObj } from 'ramda'
+import { count, equals, find, insert, isNotNil, join, lensPath, map, range, set } from 'ramda'
 import { createInterface } from 'readline'
 import { COLORS, Game } from '../models/game.js'
 
@@ -11,7 +11,7 @@ function logState (state) {
       '\n',
       [
         '~~~',
-        `round: ${state.round < 4 ? state.round + 1 : '-'}`,
+        `round: ${state.round < 4 ? state.round : '-'}`,
         `led-color: ${state?.ledColor?.[0] ?? '-'}`,
         '',
         join(
@@ -23,7 +23,7 @@ function logState (state) {
                 0,
                 `${color[0]}:`,
                 map(
-                  cell => isNotNil(cell) ? state.players[cell].name[0] : '-',
+                  cell => isNotNil(cell) ? cell : '-',
                   state.board[color]
                 )
               )
@@ -39,7 +39,7 @@ function logState (state) {
               return join(
                 '\n',
                 [
-                  `# ${player.name[0]}`,
+                  `# ${player.playerIndex}`,
                   '',
                   `score: ${player.score}`,
                   `prediction: ${player.predictionOfWinsCount ?? '-'}`,
@@ -123,31 +123,28 @@ let state = game.getNewState()
 logState(state)
 
 for (const i of range(0, players.length)) {
-  await beginGame(players[i], { name: state.players[i].name })
+  await beginGame(players[i], { playerIndex: i })
 }
 
 try {
   for (;;) {
-    const playerIndex = state.actionPlayerIndex
+    const actionPlayerIndex = state.actionPlayerIndex
     const legalActions = game.getLegalActions(state)
 
     const actionString = await Timeout.wrap(
       getAction(
-        players[playerIndex],
+        players[actionPlayerIndex],
         {
           board: state.board,
-          players: zipObj(
-            map(playerState => playerState.name, state.players),
-            map(
-              i => {
-                if (i === playerIndex) {
-                  return state.players[i]
-                } else {
-                  return set(lensPath(['hands']), null)(state.players[i])
-                }
-              },
-              range(0, state.players.length)
-            )
+          players: map(
+            i => {
+              if (i === actionPlayerIndex) {
+                return state.players[i]
+              } else {
+                return set(lensPath(['hands']), null)(state.players[i])
+              }
+            },
+            range(0, state.players.length)
           ),
           turn: state.turn,
           ledColor: state.ledColor,
@@ -158,7 +155,7 @@ try {
       'timeout...'
     )
 
-    console.error(`\n${state.players[playerIndex].name}: ${actionString}\n`)
+    console.error(`\n${actionPlayerIndex}: ${actionString}\n`)
 
     const action = JSON.parse(actionString)
 
@@ -175,21 +172,20 @@ try {
           players[i],
           {
             board: state.board,
-            players: zipObj(
-              map(playerState => playerState.name, state.players),
-              map(
-                j => {
-                  if (j === i) {
-                    return state.players[j]
-                  } else {
-                    return set(lensPath(['hands']), null)(state.players[j])
-                  }
-                },
-                range(0, state.players.length)
-              )
+            players: map(
+              j => {
+                if (j === i) {
+                  return state.players[j]
+                } else {
+                  return set(lensPath(['hands']), null)(state.players[j])
+                }
+              },
+              range(0, state.players.length)
             ),
             turn: state.turn,
-            ledColor: state.ledColor
+            ledColor: state.ledColor,
+            actionPlayerIndex,
+            action
           }
         ),
         15_000,

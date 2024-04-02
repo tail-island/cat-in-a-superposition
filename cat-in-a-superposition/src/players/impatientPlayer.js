@@ -1,10 +1,10 @@
 // プレイヤーのサンプル（性格：せっかち）
 
 class ImpatientPlayer {
-  beginGame (name) {
+  beginGame (playerIndex) {
     console.error('1-999 ver 0.0') // 標準出力は通信で使用するので、標準エラー出力にログを出力します。受付番号やバージョンをログ出力しておけば、運営のミスを検出できる！
     console.error('beginGame()')
-    console.error(name)
+    console.error(playerIndex)
   }
 
   getAction (board, players, turn, ledColor, legalActions) {
@@ -20,12 +20,14 @@ class ImpatientPlayer {
     return legalActions[0]
   }
 
-  observe (board, players, turn, ledColor) {
+  observe (board, players, turn, ledColor, actionPlayerIndex, action) {
     console.error('observe()')
     console.error(board)
     console.error(players)
     console.error(turn)
     console.error(ledColor)
+    console.error(actionPlayerIndex)
+    console.error(action)
   }
 
   endGame () {
@@ -36,16 +38,16 @@ class ImpatientPlayer {
 
 const player = new ImpatientPlayer()
 
-export function beginGame (name) {
-  player.beginGame(name)
+export function beginGame (playerIndex) {
+  player.beginGame(playerIndex)
 }
 
 export function getAction (board, players, turn, ledColor, legalActions) {
   return player.getAction(board, players, turn, ledColor, legalActions)
 }
 
-export function observe (board, players, turn, ledColor) {
-  return player.observe(board, players, turn, ledColor)
+export function observe (board, players, turn, ledColor, actionPlayerIndex, action) {
+  return player.observe(board, players, turn, ledColor, actionPlayerIndex, action)
 }
 
 export function endGame () {

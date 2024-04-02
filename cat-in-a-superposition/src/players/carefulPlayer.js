@@ -3,16 +3,16 @@
 import { equals, filter, find, groupWith, head, identity, last, length, map, max, reduce, sort } from 'ramda'
 
 class RandomPlayer {
-  beginGame (name) {
+  beginGame (playerIndex) {
     console.error('1-999 ver 0.3') // 標準出力は通信で使用するので、標準エラー出力にログを出力します。受付番号やバージョンをログ出力しておけば、運営のミスを検出できる！
 
-    this.name = name
+    this.playerIndex = playerIndex
   }
 
   discardHand (_board, players, _legalActions) {
     // 慎重なので、一番枚数の多い手札の中で、有利なので他のプレイヤーが残したいだろう最も大きな手札を破棄します。
 
-    const handGroups = groupWith(equals, players[this.name].hands)
+    const handGroups = groupWith(equals, players[this.playerIndex].hands)
     const maxGroupLength = reduce(max, 0, map(length, handGroups))
 
     return last(filter(handGroup => length(handGroup) === maxGroupLength, handGroups))[0]
@@ -47,7 +47,7 @@ class RandomPlayer {
         },
         groupWith(
           equals,
-          players[this.name].hands
+          players[this.playerIndex].hands
         )
       )
     )
@@ -70,7 +70,7 @@ class RandomPlayer {
   }
 
   getAction (board, players, turn, ledColor, legalActions) {
-    switch (players[this.name].phase) {
+    switch (players[this.playerIndex].phase) {
       case 0:
         return this.discardHand(board, players, legalActions)
 
@@ -82,7 +82,7 @@ class RandomPlayer {
     }
   }
 
-  observe (_board, _players, _turn, _ledColor) {
+  observe (_board, _players, _turn, _ledColor, _actionPlayerIndex, _action) {
     // 本当はここで状態の推移を見て色々考えたい……。パラドックスしやすいうっかり屋とかの、敵の特性が分かるかもしれない。
   }
 
@@ -93,16 +93,16 @@ class RandomPlayer {
 
 const player = new RandomPlayer()
 
-export function beginGame (name) {
-  player.beginGame(name)
+export function beginGame (playerIndex) {
+  player.beginGame(playerIndex)
 }
 
 export function getAction (board, players, turn, ledColor, legalActions) {
   return player.getAction(board, players, turn, ledColor, legalActions)
 }
 
-export function observe (board, players, turn, ledColor) {
-  return player.observe(board, players, turn, ledColor)
+export function observe (board, players, turn, ledColor, actionPlayerIndex, action) {
+  return player.observe(board, players, turn, ledColor, actionPlayerIndex, action)
 }
 
 export function endGame () {

@@ -35,10 +35,10 @@ export class Game {
               action: null
             }
           ),
-          zipObj(['name', 'hands'])
+          zipObj(['playerIndex', 'hands'])
         ),
         zip(
-          'ABCD',
+          range(0, 4 + 1),
           map(
             sort(ascend(identity)),
             splitEvery(
@@ -300,7 +300,7 @@ export class Game {
 
       // プレイヤー・トークンを置いた場所を取得します。
       const board = map(
-        color => map(index => index === playerIndex, state.board[color]),
+        color => map(ownerIndex => ownerIndex === playerIndex, state.board[color]),
         COLORS
       )
 

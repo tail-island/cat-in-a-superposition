@@ -6,8 +6,8 @@ import(`../players/${process.argv[2]}.js`).then(({ beginGame, getAction, observe
 
     switch (message.command) {
       case 'beginGame': {
-        const { name } = message.parameter
-        beginGame(name)
+        const { playerIndex } = message.parameter
+        beginGame(playerIndex)
         console.log(JSON.stringify('OK'))
         break
       }
@@ -19,8 +19,8 @@ import(`../players/${process.argv[2]}.js`).then(({ beginGame, getAction, observe
       }
 
       case 'observe': {
-        const { board, players, turn, ledColor } = message.parameter
-        observe(board, players, turn, ledColor)
+        const { board, players, turn, ledColor, actionPlayerIndex, action } = message.parameter
+        observe(board, players, turn, ledColor, actionPlayerIndex, action)
         console.log(JSON.stringify('OK'))
         break
       }
