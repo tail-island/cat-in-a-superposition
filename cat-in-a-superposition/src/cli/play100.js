@@ -19,7 +19,7 @@ for (const i of range(0, 100)) {
   mkdirSync(dataDirectory)
 
   // ゲームを実行します。
-  const gameProcess = spawnSync('npm', ['run', 'play', ...(process.platform === 'win32' ? map(command => `"${command}"`) : identity)(commands), `${integer(0, Number.MAX_SAFE_INTEGER)(rng)}`], { shell: true })
+  const gameProcess = spawnSync('npm', ['run', 'play', ...map(command => `"${command}"`, commands), `${integer(0, Number.MAX_SAFE_INTEGER)(rng)}`], { shell: true })
 
   // スコアを更新します。
   const results = split('\n', gameProcess.stdout.toString())

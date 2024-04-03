@@ -4,7 +4,7 @@ import { useGameStateStore } from '@/stores/gameState'
 const store = useGameStateStore()
 
 async function newGameState () {
-  document.getElementById('new-button').disabled = true
+  document.getElementById('new-game-button').disabled = true
 
   await store.newGameState([
     document.getElementById('player-0').value,
@@ -12,7 +12,7 @@ async function newGameState () {
     document.getElementById('player-2').value
   ])
 
-  document.getElementById('new-button').disabled = false
+  document.getElementById('new-game-button').disabled = false
 }
 </script>
 
@@ -90,7 +90,7 @@ async function newGameState () {
     </option>
   </select>
   &nbsp;
-  <button id='new-button' @click="newGameState">New</button>
+  <button id='new-game-button' @click="newGameState">New Game</button>
 </div>
 </template>
 
