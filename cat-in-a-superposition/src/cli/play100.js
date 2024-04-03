@@ -1,6 +1,6 @@
 import { spawnSync } from 'child_process'
 import { existsSync, mkdirSync, renameSync, rmSync, writeFileSync } from 'fs'
-import { append, compose, head, join, map, nth, range, slice, split, zip } from 'ramda'
+import { append, compose, head, identity, join, map, nth, range, slice, split, zip } from 'ramda'
 import { MersenneTwister19937, integer } from 'random-js'
 
 const rng = process.argv[6] ? MersenneTwister19937.seed(parseInt(process.argv[6])) : MersenneTwister19937.autoSeed()
@@ -19,7 +19,7 @@ for (const i of range(0, 100)) {
   mkdirSync(dataDirectory)
 
   // ゲームを実行します。
-  const gameProcess = spawnSync('npm', ['run', 'play', ...commands, `${integer(0, Number.MAX_SAFE_INTEGER)(rng)}`])
+  const gameProcess = spawnSync('npm', ['run', 'play', ...(process.platform === 'win32' ? map(command => `"${command}"`) : identity)(commands), `${integer(0, Number.MAX_SAFE_INTEGER)(rng)}`], { shell: true })
 
   // スコアを更新します。
   const results = split('\n', gameProcess.stdout.toString())

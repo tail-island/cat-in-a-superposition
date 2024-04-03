@@ -107,7 +107,7 @@ if (process.argv.length < 6) {
 }
 
 const players = process.argv.slice(2, 6).map((command, i) => {
-  const result = spawn(command.split(' ')[0], command.split(' ').slice(1))
+  const result = spawn(command.split(' ')[0], command.split(' ').slice(1), { shell: true })
 
   result.stdout = createInterface(result.stdout)
 
