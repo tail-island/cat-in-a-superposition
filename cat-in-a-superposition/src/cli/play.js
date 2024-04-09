@@ -193,15 +193,15 @@ try {
       )
     }
 
+    logState(state)
+
     if (game.isEnd(state)) {
       for (const i of range(0, state.players.length)) {
-        console.log(`${state.players[i].score}\t${count(playerState => playerState.score > state.players[i].score, state.players) + 1}`)
+        console.log(`${count(playerState => playerState.score > state.players[i].score, state.players) + 1}`)
       }
 
       break
     }
-
-    logState(state)
   }
 } catch (error) {
   console.error(error.message)

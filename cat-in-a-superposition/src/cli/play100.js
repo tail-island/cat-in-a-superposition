@@ -1,6 +1,6 @@
 import { spawnSync } from 'child_process'
 import { existsSync, mkdirSync, renameSync, rmSync, writeFileSync } from 'fs'
-import { append, compose, head, identity, join, map, nth, range, slice, split, zip } from 'ramda'
+import { append, head, join, map, range, slice, split, zip } from 'ramda'
 import { MersenneTwister19937, integer } from 'random-js'
 
 const rng = process.argv[6] ? MersenneTwister19937.seed(parseInt(process.argv[6])) : MersenneTwister19937.autoSeed()
@@ -29,7 +29,7 @@ for (const i of range(0, 100)) {
       zip(
         orders,
         map(
-          compose(parseInt, nth(1)),
+          parseInt,
           map(
             split('\t'),
             slice(0, 4, split('\n', gameProcess.stdout.toString()))
