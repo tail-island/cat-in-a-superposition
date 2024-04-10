@@ -29,7 +29,7 @@ for (const i of range(0, 100)) {
       zip(
         orders,
         map(
-          parseInt,
+          values => parseInt(values[0]),
           map(
             split('\t'),
             slice(0, 4, split('\n', gameProcess.stdout.toString()))

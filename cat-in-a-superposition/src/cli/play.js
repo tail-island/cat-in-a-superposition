@@ -197,7 +197,7 @@ try {
 
     if (game.isEnd(state)) {
       for (const i of range(0, state.players.length)) {
-        console.log(`${count(playerState => playerState.score > state.players[i].score, state.players) + 1}`)
+        console.log(`${count(playerState => playerState.score > state.players[i].score, state.players) + 1}\t${process.argv.slice(2, 6)[i]}`)
       }
 
       break
