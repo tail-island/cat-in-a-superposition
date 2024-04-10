@@ -132,7 +132,7 @@ Cat in a superpositionは4人で4ラウンドを実施し、各ラウンドで�
 
 |名称|説明|
 |:-- | :-- |
-|Parameter|アクション選択のためのパラメーター|
+|Parameter|観測のためのパラメーター|
 |Parameter.board|中央のボードの情報|
 |Parameter.players|プレイヤーの情報|
 |Parameter.turn|ターン。プレイヤー全員の勝利予測が終了するまで0、それ以降はアクションが実行されるたびに1ずつ増えます|
