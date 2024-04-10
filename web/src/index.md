@@ -5,6 +5,6 @@
 ![cat in the box](./image/cat-in-the-box.JPG)
 
 * [課題とコンクールの進め方](./rule.html) - 本課題の詳細です
-* [課題確認](./dist/index.html) - Cat in a superpositionを実際にプレイできます。ルールの理解やアイデア出し、業務だと言い張れる現実逃避にどうぞ
-* [課題確認（ソースコード）](./cat-in-a-superposition.zip) - 課題説明のソース・コードです。AI同士を対戦させたり、皆様のAIと対戦してみる場合にご使用ください
+* [課題確認](./dist/index.html) - Cat in a superpositionを実際にプレイできます。ルールの理解やアイデア出し、気分転換にどうぞ
+* [課題確認（ソースコード）](./cat-in-a-superposition.zip) - 課題説明のソース・コードです。AI同士の対戦や皆様のAIとの対戦にご利用ください
 * [サンプル](./python-example.zip) - Pythonで作成したサンプルです。
