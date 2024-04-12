@@ -200,7 +200,7 @@ try {
 
     if (game.isEnd(state)) {
       for (const i of range(0, state.players.length)) {
-        console.log(`${count(playerState => playerState.score > state.players[i].score, state.players) + 1}\t${commands[i]}`)
+        console.log(count(playerState => playerState.score > state.players[i].score, state.players) + 1) // 同点は同じ順位とします。
       }
 
       break

@@ -1,6 +1,6 @@
 import { spawnSync } from 'child_process'
 import { existsSync, mkdirSync, renameSync, rmSync, writeFileSync } from 'fs'
-import { addIndex, append, head, join, map, range, slice, split, zip } from 'ramda'
+import { addIndex, join, map, range, split, zip } from 'ramda'
 import { MersenneTwister19937, integer } from 'random-js'
 import { Permutation } from 'js-combinatorics'
 
@@ -10,10 +10,11 @@ const commands = process.argv.slice(2, 6)
 const scores = [0, 0, 0, 0]
 
 for (const i of range(0, 4)) {
-  const indices_collection = new Permutation(range(0, 4))
+  const indices_collection = [...new Permutation(range(0, 4))]
   const seed = integer(0, Number.MAX_SAFE_INTEGER)(rng)
 
-  for (const [indices, j] of zip(indices_collection, range(0, 24))) {
+  //  すべての並び順でゲームします。
+  for (const indices of indices_collection) {
     // ゲームのID。
     const gameId = `${i}-${join('', indices)}`
 
@@ -27,7 +28,7 @@ for (const i of range(0, 4)) {
     mkdirSync(dataDirectory)
 
     // ゲームを実行します。
-    const gameProcess = spawnSync('npm', ['run', 'play', ...map((index) => `"${commands[index]}"`, indices), `${seed}`], { shell: true })
+    const gameProcess = spawnSync('npm', ['run', 'play', ...map(index => `"${commands[index]}"`, indices), `${seed}`], { shell: true })
 
     // npm run playの結果を取得します。
     const results = split('\n', gameProcess.stdout.toString())
@@ -35,7 +36,7 @@ for (const i of range(0, 4)) {
     if (results.length >= 4) {
       // スコアを更新します。
       const orders = map(
-        line => parseInt(split('\t', line)[0]),
+        line => parseInt(line),
         results
       )
 
@@ -44,13 +45,11 @@ for (const i of range(0, 4)) {
       }
 
       console.log(`# ${gameId}`)
-      console.log()
-      for (const k of range(0, 4)) {
-        console.log(`${orders[indices.indexOf(k)]}\t${commands[k]}`)
+      for (const j of range(0, 4)) {
+        console.log(`${orders[indices.indexOf(j)]}\t${commands[j]}`)
       }
-      console.log()
     } else {
-      console.log(`${i}-${slice(-2, Infinity, '00' + j)} is no game...`)
+      console.log(`${gameId} is no game...`)
     }
 
     // ゲームのログを作成します。
@@ -60,8 +59,8 @@ for (const i of range(0, 4)) {
     )
 
     // プレイヤーのログを移動します。
-    for (const [k, index] of zip(range(0, 4), indices)) {
-      renameSync(`results/player-${index}.log`, `${dataDirectory}/${k}.log`)
+    for (const [j, index] of zip(range(0, 4), indices)) {
+      renameSync(`results/player-${j}.log`, `${dataDirectory}/${index}.log`)
     }
   }
 }
