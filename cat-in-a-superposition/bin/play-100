@@ -1,3 +1,0 @@
-#!/bin/sh
-
-npm --silent run play100 "node ./src/cli/adapter.js impatientPlayer" "node ./src/cli/adapter.js indecisivePlayer 1" "node ./src/cli/adapter.js boldPlayer" "node ./src/cli/adapter.js carefulPlayer" 1

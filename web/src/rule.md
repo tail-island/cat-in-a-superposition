@@ -6,7 +6,7 @@
 
 ## ルール
 
-Cat in a superpositionのルールを、[課題確認](./dist/index.html)の画面を使用して説明します。
+Cat in a superpositionのルールを、[課題確認](./dist/index.html)の画面を使用して説明します。まずは右上の[New Game]ボタンをクリックしてください。
 
 ![課題確認](./image/GUI.png)
 

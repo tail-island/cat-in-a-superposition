@@ -1,7 +1,7 @@
 import Timeout from 'await-timeout'
 import { spawn } from 'child_process'
 import { createWriteStream } from 'fs'
-import { count, equals, find, insert, isNotNil, join, lensPath, map, range, set } from 'ramda'
+import { count, equals, find, insert, isNotNil, join, lensPath, map, range, set, zip } from 'ramda'
 import { createInterface } from 'readline'
 import { COLORS, Game } from '../models/game.js'
 
@@ -106,7 +106,10 @@ if (process.argv.length < 6) {
   process.exit(1)
 }
 
-const players = process.argv.slice(2, 6).map((command, i) => {
+const commands = process.argv.slice(2, 6)
+const seed = process.argv[6] != null ? parseInt(process.argv[6]) : null
+
+const players = commands.map((command, i) => {
   const result = spawn(command.split(' ')[0], command.split(' ').slice(1), { shell: true })
 
   result.stdout = createInterface(result.stdout)
@@ -117,7 +120,7 @@ const players = process.argv.slice(2, 6).map((command, i) => {
   return result
 })
 
-const game = new Game(process.argv[6] != null ? parseInt(process.argv[6]) : null)
+const game = new Game(seed)
 
 let state = game.getNewState()
 logState(state)
@@ -197,7 +200,7 @@ try {
 
     if (game.isEnd(state)) {
       for (const i of range(0, state.players.length)) {
-        console.log(`${count(playerState => playerState.score > state.players[i].score, state.players) + 1}\t${process.argv.slice(2, 6)[i]}`)
+        console.log(`${count(playerState => playerState.score > state.players[i].score, state.players) + 1}\t${commands[i]}`)
       }
 
       break
