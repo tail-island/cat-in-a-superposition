@@ -10,10 +10,10 @@ const commands = process.argv.slice(2, 6)
 const scores = [0, 0, 0, 0]
 
 for (const i of range(0, 4)) {
-  const indices_collection = [...new Permutation(range(0, 4))]
+  const indices_collection = new Permutation(range(0, 4))
   const seed = integer(0, Number.MAX_SAFE_INTEGER)(rng)
 
-  for (const [indices, j] of zip(indices_collection, range(0, indices_collection.length))) {
+  for (const [indices, j] of zip(indices_collection, range(0, 24))) {
     // ゲームのID。
     const gameId = `${i}-${join('', indices)}`
 
