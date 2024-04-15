@@ -46,7 +46,7 @@ for (const i of range(0, 4)) {
 
       console.log(`# ${gameId}`)
       for (const j of range(0, 4)) {
-        console.log(`${orders[indices.indexOf(j)]}\t${commands[j]}`)
+        console.log(orders[indices.indexOf(j)])
       }
     } else {
       console.log(`${gameId} is no game...`)

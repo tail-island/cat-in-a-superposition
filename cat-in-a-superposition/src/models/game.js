@@ -1,4 +1,4 @@
-import { __, always, all, any, ascend, chain, complement, compose, equals, filter, findIndex, identity, inc, isEmpty, isNil, last, lensPath, map, max, mergeLeft, modulo, over, pipe, range, remove, repeat, set, sort, splitEvery, uniq, zip, zipObj } from 'ramda'
+import { __, always, all, any, ascend, chain, complement, compose, count, equals, filter, findIndex, identity, inc, isEmpty, isNil, last, lensPath, map, max, mergeLeft, modulo, over, pipe, range, remove, repeat, set, sort, splitEvery, uniq, zip, zipObj } from 'ramda'
 import { MersenneTwister19937 } from 'random-js'
 import { shuffle } from './utility.js'
 
@@ -160,7 +160,7 @@ export class Game {
               )(result)
             }
 
-            // ハードを手札から取り出します。
+            // カードを手札から取り出します。
             result = over(
               lensPath(['players', actionPlayerIndex, 'hands']),
               hands => remove(findIndex(equals(action.hand), hands), 1, hands)
@@ -480,5 +480,10 @@ export class Game {
   // ゲームが終了していれば真、そうでなければ偽を返します。
   isEnd (state) {
     return state.round === 4
+  }
+
+  // 順位を取得します。
+  getOrders (state) {
+    return map(i => count(playerState => playerState.score > state.players[i].score, state.players) + 1, range(0, 4)) // 同点は同じ順位とします。
   }
 }

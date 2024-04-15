@@ -1,7 +1,7 @@
 import Timeout from 'await-timeout'
 import { spawn } from 'child_process'
 import { createWriteStream } from 'fs'
-import { count, equals, find, insert, isNotNil, join, lensPath, map, range, set, zip } from 'ramda'
+import { equals, find, insert, isNotNil, join, lensPath, map, range, set } from 'ramda'
 import { createInterface } from 'readline'
 import { COLORS, Game } from '../models/game.js'
 
@@ -199,8 +199,8 @@ try {
     logState(state)
 
     if (game.isEnd(state)) {
-      for (const i of range(0, state.players.length)) {
-        console.log(count(playerState => playerState.score > state.players[i].score, state.players) + 1) // 同点は同じ順位とします。
+      for (const order of game.getOrders(state)) {
+        console.log(order)
       }
 
       break
