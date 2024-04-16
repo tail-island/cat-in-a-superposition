@@ -10,11 +10,11 @@ const commands = process.argv.slice(2, 6)
 const scores = [0, 0, 0, 0]
 
 for (const i of range(0, 4)) {
-  const indices_collection = [...new Permutation(range(0, 4))]
+  const indicesCollection = [...new Permutation(range(0, 4))]
   const seed = integer(0, Number.MAX_SAFE_INTEGER)(rng)
 
   //  すべての並び順でゲームします。
-  for (const indices of indices_collection) {
+  for (const indices of indicesCollection) {
     // ゲームのID。
     const gameId = `${i}-${join('', indices)}`
 
@@ -44,12 +44,12 @@ for (const i of range(0, 4)) {
         scores[index] += order
       }
 
-      console.log(`# ${gameId}`)
+      console.error(`# ${gameId}`)
       for (const j of range(0, 4)) {
-        console.log(orders[indices.indexOf(j)])
+        console.error(orders[indices.indexOf(j)])
       }
     } else {
-      console.log(`${gameId} is no game...`)
+      console.error(`${gameId} is no game...`)
     }
 
     // ゲームのログを作成します。
