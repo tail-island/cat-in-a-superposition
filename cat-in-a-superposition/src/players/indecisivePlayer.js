@@ -26,5 +26,5 @@ class IndecisivePlayer {
 }
 
 export function createPlayer (argv) {
-  return new IndecisivePlayer(argv.length > 0 ? parseInt(argv[0]) : null)
+  return new IndecisivePlayer(argv && argv.length > 0 ? parseInt(argv[0]) : null)
 }
