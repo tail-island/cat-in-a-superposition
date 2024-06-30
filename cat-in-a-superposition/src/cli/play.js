@@ -190,7 +190,7 @@ try {
             turn: state.turn,
             ledColor: state.ledColor,
             actionPlayerIndex,
-            action: actionPlayerIndex !== i && previousState.players[actionPlayerIndex].phase === 0 ? -1 : action  // リークがあったので修正。-1よりnullの方が好みだけど、静的な型の言語でエラーになるので-1で。
+            action: actionPlayerIndex !== i && previousState.players[actionPlayerIndex].phase === 0 ? -1 : action // リークがあったので修正。-1よりnullの方が好みだけど、静的な型の言語でエラーになるので-1で。
           }
         ),
         15_000,
