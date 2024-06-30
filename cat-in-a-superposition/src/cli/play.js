@@ -167,9 +167,11 @@ try {
       break
     }
 
+    const previousState = state
     state = game.getNextState(state, action)
 
     for (const i of range(0, state.players.length)) {
+      console.log(actionPlayerIndex !== i && previousState.players[actionPlayerIndex].phase === 0)
       await Timeout.wrap(
         observe(
           players[i],
@@ -188,7 +190,7 @@ try {
             turn: state.turn,
             ledColor: state.ledColor,
             actionPlayerIndex,
-            action
+            action: actionPlayerIndex !== i && previousState.players[actionPlayerIndex].phase === 0 ? -1 : action  // リークがあったので修正。-1よりnullの方が好みだけど、静的な型の言語でエラーになるので-1で。
           }
         ),
         15_000,

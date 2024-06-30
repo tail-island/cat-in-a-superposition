@@ -4,6 +4,8 @@
 
 ![cat in the box](./image/cat-in-the-box.JPG)
 
+**6/27 申し訳ありません。課題確認のプログラムにバグがありました。再ダウンロードをお願いいたします。修正点は、observationで自分以外のプレイヤーの捨て札のリーク防止です。自分以外のプレイヤーでは-1となるようにしました。**
+
 ## ルール
 
 Cat in a superpositionのルールを、[課題確認](./dist/index.html)の画面を使用して説明します。[課題確認](./dist/index.html)に遷移して、右上の[New Game]ボタンをクリックしてください。
@@ -163,7 +165,7 @@ Cat in a superpositionは4人で4ラウンドを実施し、各ラウンドで�
 |yellow|黄を宣言可能ならtrue、そうでなければfalse|
 |green|緑を宣言可能ならtrue、そうでなければfalse|
 |Action|アクション|
-|DiscardHand|実際の型はint。不要カードの数字|
+|DiscardHand|実際の型はint。不要カードの数字。**自分の場合以外は-1**|
 |PredictWinsCount|実際の型はint。勝利数予測|
 |DeclareObservedColor|カードの色の宣言|
 |DeclareObservedColor.color|宣言する色|

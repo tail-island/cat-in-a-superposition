@@ -4,6 +4,8 @@
 
 ![cat in the box](./image/cat-in-the-box.JPG)
 
+**6/27 申し訳ありません。課題確認のプログラムにバグがありました。再ダウンロードをお願いいたします。**
+
 * [課題とコンクールの進め方](./rule.html) - 本課題の詳細です
 * [課題確認](./dist/index.html) - Cat in a superpositionを実際にプレイできます。ルールの理解やアイデア出し、気分転換にどうぞ
 * [課題確認（ソースコード）](./cat-in-a-superposition.zip) - 課題説明のソース・コードです。AI同士の対戦や皆様のAIとの対戦にご利用ください

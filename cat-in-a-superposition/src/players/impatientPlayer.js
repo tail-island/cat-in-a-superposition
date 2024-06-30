@@ -4,16 +4,20 @@ class ImpatientPlayer {
   beginGame (playerIndex) {
     console.error('1-999 ver 0.0') // 標準出力は通信で使用するので、標準エラー出力にログを出力します。受付番号やバージョンをログ出力しておけば、運営のミスを検出できる！
     console.error('beginGame()')
-    console.error(playerIndex)
+    console.error({
+      playerIndex
+    })
   }
 
   getAction (board, players, turn, ledColor, legalActions) {
     console.error('getAction()')
-    console.error(board)
-    console.error(players)
-    console.error(turn)
-    console.error(ledColor)
-    console.error(legalActions)
+    console.error({
+      board,
+      players,
+      turn,
+      ledColor,
+      legalActions
+    })
 
     // せっかちなので、どんな合法手があるのか調べもせずに、最初の合法手を選びます。
 
@@ -22,16 +26,19 @@ class ImpatientPlayer {
 
   observe (board, players, turn, ledColor, actionPlayerIndex, action) {
     console.error('observe()')
-    console.error(board)
-    console.error(players)
-    console.error(turn)
-    console.error(ledColor)
-    console.error(actionPlayerIndex)
-    console.error(action)
+    console.error({
+      board,
+      players,
+      turn,
+      ledColor,
+      actionPlayerIndex,
+      action
+    })
   }
 
   endGame () {
     console.error('endGame()')
+    console.error({})
     console.error('終了')
   }
 }
