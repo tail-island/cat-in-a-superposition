@@ -171,7 +171,6 @@ try {
     state = game.getNextState(state, action)
 
     for (const i of range(0, state.players.length)) {
-      console.log(actionPlayerIndex !== i && previousState.players[actionPlayerIndex].phase === 0)
       await Timeout.wrap(
         observe(
           players[i],
