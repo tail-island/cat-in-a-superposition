@@ -115,10 +115,10 @@ Cat in a superpositionは4人で4ラウンドを実施し、各ラウンドで�
 |Player.winsCount|当該ラウンドでのプレイヤーの勝利数|
 |Player.action|プレイヤーが選択したアクション。選択するまではnull|
 |Colors|プレイヤーの前のボードの宣言可能な色の情報|
-|red|赤を宣言可能ならtrue、そうでなければfalse|
-|blue|青を宣言可能ならtrue、そうでなければfalse|
-|yellow|黄を宣言可能ならtrue、そうでなければfalse|
-|green|緑を宣言可能ならtrue、そうでなければfalse|
+|Colors.red|赤を宣言可能ならtrue、そうでなければfalse|
+|Colors.blue|青を宣言可能ならtrue、そうでなければfalse|
+|Colors.yellow|黄を宣言可能ならtrue、そうでなければfalse|
+|Colors.green|緑を宣言可能ならtrue、そうでなければfalse|
 |Action|アクション|
 |DiscardHand|実際の型はint。不要カードの数字|
 |PredictWinsCount|実際の型はint。勝利数予測|
@@ -133,7 +133,7 @@ Cat in a superpositionは4人で4ラウンドを実施し、各ラウンドで�
 
 自分を含む全てのプレイヤーのアクションが実行された後に発生します。
 
-入力は、以下のUMLのクラス図で示す情報がJSONで渡ってきます。敵プレイヤーがどのようなアクションを選択したのかを元に敵の手札や狙いを予測したり、盤面の推移から取り得る戦術を取捨選択したりしてみてください。処理が完了したら、JOSN形式のデータを何か（`OK`等）出力してください。
+入力は、以下のUMLのクラス図で示す情報がJSONで渡ってきます。敵プレイヤーがどのようなアクションを選択したのかを元に敵の手札や狙いを予測したり、盤面の推移から取り得る戦術を取捨選択したりしてみてください。処理が完了したら、JSON形式のデータを何か（`OK`等）出力してください。
 
 ![observe](./image/observe.png)
 
@@ -160,10 +160,10 @@ Cat in a superpositionは4人で4ラウンドを実施し、各ラウンドで�
 |Player.winsCount|当該ラウンドでのプレイヤーの勝利数|
 |Player.action|プレイヤーが選択したアクション。選択するまではnull|
 |Colors|プレイヤーの前のボードの宣言可能な色の情報|
-|red|赤を宣言可能ならtrue、そうでなければfalse|
-|blue|青を宣言可能ならtrue、そうでなければfalse|
-|yellow|黄を宣言可能ならtrue、そうでなければfalse|
-|green|緑を宣言可能ならtrue、そうでなければfalse|
+|Colors.red|赤を宣言可能ならtrue、そうでなければfalse|
+|Colors.blue|青を宣言可能ならtrue、そうでなければfalse|
+|Colors.yellow|黄を宣言可能ならtrue、そうでなければfalse|
+|Colors.green|緑を宣言可能ならtrue、そうでなければfalse|
 |Action|アクション|
 |DiscardHand|実際の型はint。不要カードの数字。**自分の場合以外は-1**|
 |PredictWinsCount|実際の型はint。勝利数予測|
@@ -176,7 +176,7 @@ Cat in a superpositionは4人で4ラウンドを実施し、各ラウンドで�
 
 ゲームを終了するときに発生します。プログラムの終了処理に使用してください。
 
-入力はありません。プログラムの終了処理が完了したら、JOSN形式のデータを何か（`OK`等）出力してください。
+入力はありません。プログラムの終了処理が完了したら、JSON形式のデータを何か（`OK`等）出力してください。
 
 ### 注意点
 
