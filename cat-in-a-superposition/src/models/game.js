@@ -173,7 +173,7 @@ export class Game {
             )(result)
 
             // 基準色と異なる色を使用した場合は、プレイヤー・ボードの基準色を☓にします。
-            if (action.color !== state.ledColor) {
+            if (state.ledColor && action.color !== state.ledColor) {
               result = set(
                 lensPath(['players', actionPlayerIndex, 'colors', state.ledColor]),
                 false
